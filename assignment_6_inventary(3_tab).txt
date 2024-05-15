@@ -1,0 +1,41 @@
+-- IN THE INVENTORY STRUCTURE GENERATE A VIEW BILL. IT SHOULD DISPLAY  OID,ODATE,CNAME,ADDRESS,PHONE,PDESC, PRICE, OQTY, AMOUNT
+use assignment_1;
+select *from customers;
+select *from orders;
+select *from product;
+select *from stock;
+select *from supplier;
+
+-- main sql query to merge three table
+select O.OID, O.ODATE, C.CNAME, C.ADDRESS, C.PHONE, O.QTY, P.PDESC, P.PRICE
+from orders O
+inner join customers C on O.OID = C.CID 
+inner join product P on  P.PID = O.PID;
+
+INSERT INTO customers  
+VALUES 
+(1, 'John Doe', '123 Main St', 'New York', '1234567890', 'john@example.com', '1990-05-14'),
+(2, 'Jane Smith', '456 Elm St', 'Los Angeles', '9876543210', 'jane@example.com', '1995-08-21'),
+(3, 'Michael Johnson', '789 Oak St', 'Chicago', '4567890123', 'michael@example.com', '1988-11-30'),
+(4, 'Emily Brown', '101 Pine St', 'Houston', '7890123456', 'emily@example.com', '1992-03-07'),
+(5, 'David Wilson', '202 Maple St', 'Miami', '2345678901', 'david@example.com', '1985-09-18');
+
+INSERT INTO orders
+VALUES
+(1, '2024-05-14', 1001, 2001, 10),
+(2, '2024-05-15', 1002, 2002, 8),
+(3, '2024-05-16', 1003, 2003, 15),
+(4, '2024-05-17', 1004, 2004, 12),
+(5, '2024-05-18', 1005, 2005, 20);
+
+INSERT INTO product
+VALUES
+(2001, 'Product 1', 'Category A', 10, 501),
+(2002, 'Product 2', 'Category B', 15, 502),
+(2003, 'Product 3', 'Category A', 12, 503),
+(2004, 'Product 4', 'Category C', 20, 504),
+(2005, 'Product 5', 'Category B', 18, 505);
+
+alter table product 
+drop constraint product_chk_2;
+
